@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../config/axios";
 import { Code2, Send } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,14 +13,17 @@ const LeetCode = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("https://questify-backend-gqvx.onrender.com/store-email", {
+      console.log('Sending request to:', import.meta.env.VITE_BACKEND_URL);
+      const response = await axios.post("/api/email/store-email", {
         email,
         platform: "LeetCode"
       });
+      console.log('Response:', response);
       toast.success(response.data.message || "Successfully subscribed!");
       setEmail("");
     } catch (error) {
-      toast.error("Error subscribing. Please try again.");
+      console.error('Subscription error:', error);
+      toast.error(error.response?.data?.message || "Error subscribing. Please try again.");
     } finally {
       setIsLoading(false);
     }

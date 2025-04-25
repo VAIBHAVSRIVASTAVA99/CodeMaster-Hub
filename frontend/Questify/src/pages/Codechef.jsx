@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../config/axios";
 import { Flame, Send, Code2 } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,7 +13,7 @@ const Codechef = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:3000/api/email/store-email", {
+      const response = await axios.post("/api/email/store-email", {
         email,
         platform: "Codechef"
       });

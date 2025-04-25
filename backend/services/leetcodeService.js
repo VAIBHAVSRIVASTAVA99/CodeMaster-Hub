@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const fetchRandomLeetCodeQuestion = async () => {
     try {
       const response = await axios.get('https://leetcode.com/api/problems/all/');
@@ -16,4 +18,6 @@ const fetchRandomLeetCodeQuestion = async () => {
       return null;
     }
   };
+  
+module.exports = fetchRandomLeetCodeQuestion;
   

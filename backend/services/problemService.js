@@ -12,7 +12,6 @@ const fetchRandomQuestion = async () => {
   return await randomSource();
 };
 
-// ✅ Add this export block
 module.exports = {
   fetchRandomLeetCodeQuestion,
   fetchRandomCodeforcesQuestion,

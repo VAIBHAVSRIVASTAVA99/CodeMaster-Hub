@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const fetchRandomCodeforcesQuestion = async () => {
     try {
       const response = await axios.get('https://codeforces.com/api/problemset.problems');
@@ -15,4 +17,6 @@ const fetchRandomCodeforcesQuestion = async () => {
       return null;
     }
   };
+  
+module.exports = fetchRandomCodeforcesQuestion;
   
