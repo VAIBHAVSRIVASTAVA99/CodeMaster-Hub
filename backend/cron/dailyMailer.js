@@ -42,7 +42,6 @@ const sendDailyProblemEmail = async () => {
   }
 };
 
-// ✅ Wrap the cron job in a function so server.js can call it
 const scheduleDailyEmail = () => {
   cron.schedule(
     '30 3 * * *',

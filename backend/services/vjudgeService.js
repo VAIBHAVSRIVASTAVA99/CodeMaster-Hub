@@ -1,17 +1,15 @@
 const VJudgeData = require('../models/VJudgeData');
 const scrapeVJudgeHeatmap = require('../scarper/vjudge');
 
-const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const CACHE_DURATION = 24 * 60 * 60 * 1000; 
 
 async function getVJudgeData(username) {
   try {
-    // First check if we have cached data
     const cachedData = await VJudgeData.findOne({ username });
     
     if (cachedData) {
       const timeSinceLastUpdate = Date.now() - cachedData.lastUpdated.getTime();
       
-      // If data is less than 24 hours old, return cached data
       if (timeSinceLastUpdate < CACHE_DURATION) {
         return {
           success: true,
@@ -21,7 +19,6 @@ async function getVJudgeData(username) {
       }
     }
     
-    // If no cached data or data is old, scrape new data
     const scrapedData = await scrapeVJudgeHeatmap(username);
     
     if (!scrapedData.success) {
@@ -31,7 +28,6 @@ async function getVJudgeData(username) {
       };
     }
     
-    // Update or create new record in database
     const vjudgeData = {
       username,
       data: scrapedData.data,

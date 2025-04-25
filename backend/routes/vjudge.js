@@ -4,7 +4,6 @@ const router = express.Router();
 const User = require("../models/User"); // Import the User model
 const { getVJudgeData } = require("../services/vjudgeService");
 
-// Route: GET /api/vjudge/:username - Get VJudge data with caching
 router.get("/:username", async (req, res) => {
   try {
     const { username } = req.params;

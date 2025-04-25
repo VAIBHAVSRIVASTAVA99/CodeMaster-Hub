@@ -20,18 +20,16 @@ async function scrapeVJudgeHeatmap(username) {
     await driver.wait(until.elementLocated(By.css('svg')), 15000);
     await driver.sleep(3000);
     
-    // Generate all Fridays from 2024-12-13 to current date
     const fridays = getAllFridaysFromDateToNow('2024-12-13');
     console.log(`Going to check ${fridays.length} Fridays`);
     
     const results = [];
     
     for (const fridayDate of fridays) {
-      const dateStr = fridayDate.toISOString().split('T')[0]; // YYYY-MM-DD format
+      const dateStr = fridayDate.toISOString().split('T')[0];
       console.log(`Processing ${dateStr}`);
       
       try {
-        // Find the rectangle for this date
         const dateRects = await driver.findElements(By.css('svg rect[data-date]'));
         
         let targetRect = null;
@@ -62,14 +60,11 @@ async function scrapeVJudgeHeatmap(username) {
           continue;
         }
         
-        // Click the rectangle using WebDriver actions
         const actions = driver.actions({async: true});
         await actions.move({origin: targetRect}).click().perform();
         
-        // Wait for problem list to load
         await driver.sleep(2000);
         
-        // Get problem data
         const rows = await driver.findElements(By.css('table tr'));
         const problemsData = [];
         
@@ -98,8 +93,6 @@ async function scrapeVJudgeHeatmap(username) {
           problems: problemsData
         });
         
-        // Navigate back to the user page to reset for the next date check
-        // (This is needed because clicking on a date changes the view)
         await driver.get(url);
         await driver.wait(until.elementLocated(By.css('svg')), 15000);
         await driver.sleep(2000);
@@ -113,7 +106,6 @@ async function scrapeVJudgeHeatmap(username) {
           problems: []
         });
         
-        // Try to recover for the next iteration
         await driver.get(url);
         await driver.wait(until.elementLocated(By.css('svg')), 15000);
         await driver.sleep(2000);
@@ -141,22 +133,19 @@ async function scrapeVJudgeHeatmap(username) {
   }
 }
 
-// Helper function to get all Fridays from a start date to now
 function getAllFridaysFromDateToNow(startDateStr) {
   const startDate = new Date(startDateStr);
   const today = new Date();
   const fridays = [];
   
-  // Find the first Friday on or after the start date
   let currentDate = new Date(startDate);
-  while (currentDate.getDay() !== 5) { // 5 is Friday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+  while (currentDate.getDay() !== 5) {
     currentDate.setDate(currentDate.getDate() + 1);
   }
   
-  // Add all Fridays from the first one found to today
   while (currentDate <= today) {
     fridays.push(new Date(currentDate));
-    currentDate.setDate(currentDate.getDate() + 7); // Add 7 days to get to the next Friday
+    currentDate.setDate(currentDate.getDate() + 7);
   }
   
   return fridays;
