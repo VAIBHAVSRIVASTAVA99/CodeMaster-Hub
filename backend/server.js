@@ -9,7 +9,6 @@ const scheduleDailyEmail = require('./cron/dailyMailer');
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 app.use(cors({
   origin: '*',
@@ -18,7 +17,6 @@ app.use(cors({
   credentials: true
 }));
 
-// Root route
 app.get('/', (req, res) => {
   res.json({ 
     message: 'Server is running!',
@@ -26,18 +24,15 @@ app.get('/', (req, res) => {
   });
 });
 
-// Connect to MongoDB
 connectDB().then(() => {
   console.log('MongoDB connection successful');
 }).catch(err => {
   console.error('MongoDB connection error:', err);
 });
 
-// API Routes
 app.use('/api/email', emailRoutes);
 app.use('/api/vjudge', vjudgeRoutes);
 
-// Error Handler
 app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(500).json({
@@ -47,13 +42,11 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start server
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// Handle server errors
 server.on('error', (error) => {
   console.error('Server error:', error);
 });
@@ -67,7 +60,6 @@ process.on('uncaughtException', (error) => {
   process.exit(1);
 });
 
-// Start Cron Job for daily emails
 if (process.env.NODE_ENV === 'production') {
   scheduleDailyEmail();
 }

@@ -48,7 +48,6 @@ const Codeforces = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Increased the width by using max-w-6xl above and making these full width */}
           <div className="bg-gray-800 rounded-lg p-8 shadow-lg">
             <h2 className="text-xl font-bold text-white mb-6">Why Codeforces?</h2>
             <ul className="space-y-4 text-gray-300">

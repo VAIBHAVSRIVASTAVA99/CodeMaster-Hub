@@ -1,7 +1,6 @@
-// routes/vjudgeRoutes.js
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User"); // Import the User model
+const User = require("../models/User");
 const { getVJudgeData } = require("../services/vjudgeService");
 
 router.get("/:username", async (req, res) => {
