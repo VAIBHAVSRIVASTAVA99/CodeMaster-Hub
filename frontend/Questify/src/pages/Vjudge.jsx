@@ -35,10 +35,6 @@ const VJudgeTracker = () => {
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4">
     <Sparkles className="w-full h-full" />
       <div className="flex flex-col items-center space-y-4">
-<<<<<<< HEAD
-        {/* Icon Circle */}
-=======
->>>>>>> parent of 2d0a233 (deletingoldcode)
         <div className="bg-green-600 rounded-full p-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -51,10 +47,6 @@ const VJudgeTracker = () => {
           </svg>
         </div>
 
-<<<<<<< HEAD
-        {/* Card */}
-=======
->>>>>>> parent of 2d0a233 (deletingoldcode)
         <div className="bg-zinc-900 p-8 rounded-xl shadow-lg max-w-md w-full">
           <h1 className="text-2xl font-bold text-green-500 text-center mb-2">VJudge Tracker</h1>
           <p className="text-center text-gray-400 mb-6">
