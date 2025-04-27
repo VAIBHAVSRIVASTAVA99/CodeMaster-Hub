@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-// routes/vjudgeRoutes.js
-const express = require("express");
-const router = express.Router();
-const User = require("../models/User"); // Import the User model
-=======
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
->>>>>>> parent of 2d0a233 (deletingoldcode)
 const { getVJudgeData } = require("../services/vjudgeService");
 
 router.get("/:username", async (req, res) => {
